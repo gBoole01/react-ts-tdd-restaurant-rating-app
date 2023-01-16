@@ -1,5 +1,5 @@
-describe('Smoke Test', () => {
-  it('can handle the truth', () => {
-    expect(true).toEqual(true)
-  })
+import { expect, test } from 'vitest'
+
+test('can handle the truth', () => {
+  expect(true).toEqual(true)
 })
