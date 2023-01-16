@@ -2,6 +2,8 @@
 
 This app uses React and Typescript and let the user add his restaurants and their dishes and leave a note on them.
 
+This project will be developed following the TDD principles.
+
 ## Usage
 
 1. clone this repository to get started
