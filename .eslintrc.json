@@ -21,7 +21,9 @@
         "tsx": "never"
       }
     ],
-    "semi": "off"
+    "semi": "off",
+    "object-curly-newline": ["error", { "minProperties": 6 }],
+    "no-console": "off"
     // your custom rules here
   },
   "settings": {
