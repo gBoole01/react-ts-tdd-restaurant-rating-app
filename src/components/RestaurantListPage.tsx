@@ -1,8 +1,15 @@
+import { useState } from 'react'
 import NewRestaurantForm from './NewRestaurantForm'
+import RestaurantList from './RestaurantList'
+
+export type Restaurant = {
+  name: string
+}
 
 export default function RestaurantListPage() {
-  const saveHandler = ({ name }: { name: string }) => {
-    console.log(name)
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+  const onAddRestaurant = ({ name }: { name: string }) => {
+    setRestaurants((prevRestaurants) => [...prevRestaurants, { name }])
   }
 
   return (
@@ -10,7 +17,8 @@ export default function RestaurantListPage() {
       <button type="button" data-testid="addRestaurantButton">
         Add Restaurant
       </button>
-      <NewRestaurantForm onSave={saveHandler} />
+      <NewRestaurantForm onSave={onAddRestaurant} />
+      <RestaurantList restaurants={restaurants} />
     </>
   )
 }

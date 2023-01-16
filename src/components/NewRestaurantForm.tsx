@@ -16,7 +16,10 @@ export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
         onChange={(e) => setName(e.target.value)}
       />
       <button
-        onClick={() => onSave({ name })}
+        onClick={() => {
+          onSave({ name })
+          setName('')
+        }}
         type="button"
         data-testid="saveNewRestaurantButton"
       >
