@@ -1,5 +1,5 @@
-function App() {
-  return <h1>Restaurant Rating</h1>
-}
+import RestaurantListPage from './components/RestaurantListPage'
 
-export default App
+export default function App() {
+  return <RestaurantListPage />
+}
