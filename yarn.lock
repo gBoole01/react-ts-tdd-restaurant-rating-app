@@ -541,6 +541,14 @@
   dependencies:
     "@swc/core" "^1.3.22"
 
+"@vitest/coverage-c8@^0.27.1":
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/@vitest/coverage-c8/-/coverage-c8-0.27.1.tgz#786e52d6f49417f5d2df3f4e29fe47fcfac13f73"
+  integrity sha512-/9VTGDIAp4hv8PBawfyijxhkiyucfOxFRRP+7kzy3Dj0wONy1Mc2MBoPmiH4aZVc0LViQqecrQLs8JVGt42keA==
+  dependencies:
+    c8 "^7.12.0"
+    vitest "0.27.1"
+
 abab@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.6.tgz#41b80f2c871d19686216b82309231cfd3cb3d291"
@@ -3602,7 +3610,7 @@ vite-node@0.27.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitest@^0.27.1:
+vitest@0.27.1, vitest@^0.27.1:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.27.1.tgz#62e61a70eb8fba60f0888f8e69c61622eb92203b"
   integrity sha512-1sIpQ1DVFTEn7c1ici1XHcVfdU4nKiBmPtPAtGKJJJLuJjojTv/OHGgcf69P57alM4ty8V4NMv+7Yoi5Cxqx9g==
