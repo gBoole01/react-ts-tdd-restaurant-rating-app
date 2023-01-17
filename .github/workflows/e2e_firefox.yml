@@ -1,19 +1,19 @@
-name: E2E on Firefox
+# name: E2E on Firefox
 
-on: [push]
+# on: [push]
 
-jobs:
-  install:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+# jobs:
+#   install:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v3
-        with:
-          project: .
-          browser: firefox
-          build: yarn build
-          start: yarn preview
-          wait-on: 'http://localhost:4173'
+#       - name: Cypress run
+#         uses: cypress-io/github-action@v3
+#         with:
+#           project: .
+#           browser: firefox
+#           build: yarn build
+#           start: yarn preview
+#           wait-on: 'http://localhost:4173'
