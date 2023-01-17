@@ -3,13 +3,11 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
-  push:
-    branches-ignore:
-      - main
   workflow_run:
     workflows: [E2E on Chrome, E2E on Firefox, Unit Testing]
     types:
       - completed
+    branches-ignore: -main
 
 jobs:
   Deploy-Preview:
