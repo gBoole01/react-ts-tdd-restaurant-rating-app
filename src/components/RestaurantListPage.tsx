@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import { useState } from 'react'
 import NewRestaurantForm from './NewRestaurantForm'
 import RestaurantList from './RestaurantList'
@@ -17,13 +18,14 @@ export default function RestaurantListPage() {
 
   return (
     <>
-      <button
+      <Button
+        variant="contained"
         type="button"
         data-testid="addRestaurantButton"
-        onClick={() => setShowRestaurantForm(true)}
+        onClick={() => setShowRestaurantForm(!showRestaurantForm)}
       >
         Add Restaurant
-      </button>
+      </Button>
       {showRestaurantForm && <NewRestaurantForm onSave={onAddRestaurant} />}
       <RestaurantList restaurants={restaurants} />
     </>
