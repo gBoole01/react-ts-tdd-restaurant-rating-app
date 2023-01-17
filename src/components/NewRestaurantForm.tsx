@@ -17,10 +17,12 @@ export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
       sx={{
         display: 'flex',
         gap: '.5rem',
+        width: '100%',
       }}
     >
       <TextField
         variant="outlined"
+        sx={{ width: '70%' }}
         label="Name"
         inputProps={inputProps}
         value={name}
@@ -28,6 +30,7 @@ export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
       />
       <Button
         variant="contained"
+        sx={{ flexGrow: '1' }}
         onClick={() => {
           onSave({ name })
           setName('')

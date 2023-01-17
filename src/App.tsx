@@ -20,7 +20,7 @@ export default function App() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          gap: '.75rem',
+          gap: '1rem',
         }}
       >
         <RestaurantListPage />
