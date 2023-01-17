@@ -8,16 +8,23 @@ export type Restaurant = {
 
 export default function RestaurantListPage() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-  const onAddRestaurant = ({ name }: { name: string }) => {
+  const [showRestaurantForm, setShowRestaurantForm] = useState(false)
+
+  const onAddRestaurant = ({ name }: Restaurant) => {
     setRestaurants((prevRestaurants) => [...prevRestaurants, { name }])
+    setShowRestaurantForm(false)
   }
 
   return (
     <>
-      <button type="button" data-testid="addRestaurantButton">
+      <button
+        type="button"
+        data-testid="addRestaurantButton"
+        onClick={() => setShowRestaurantForm(true)}
+      >
         Add Restaurant
       </button>
-      <NewRestaurantForm onSave={onAddRestaurant} />
+      {showRestaurantForm && <NewRestaurantForm onSave={onAddRestaurant} />}
       <RestaurantList restaurants={restaurants} />
     </>
   )
