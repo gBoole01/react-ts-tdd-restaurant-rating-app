@@ -2,16 +2,17 @@ name: GitHub Actions Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   workflow_run:
     workflows: [Test]
-    types:
-      - completed
-    branches-ignore: -main
+    types: [completed]
+    branches-ignore: [main]
 
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
@@ -22,3 +23,8 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+  No-Deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'Test job has failed, Deployment aborted..'

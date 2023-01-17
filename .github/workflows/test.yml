@@ -24,7 +24,7 @@ jobs:
           start: yarn preview
           wait-on: 'http://localhost:4173'
 
-      - name: Run e2e Tests on Chrome
+      - name: Run e2e Tests on Firefox
         uses: cypress-io/github-action@v3
         with:
           project: .
