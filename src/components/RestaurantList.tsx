@@ -15,21 +15,25 @@ type RestaurantListProps = {
 export default function RestaurantList({ restaurants }: RestaurantListProps) {
   return (
     <Box sx={{ width: '100%' }}>
-      {restaurants.length > 0 && (
-        <>
-          <Typography variant="h5">Restaurants</Typography>
-          <List sx={{ bgcolor: 'lightgray' }}>
-            {restaurants.map((restaurant, index) => (
-              <div key={restaurant.name}>
-                {index > 0 && index < restaurants.length && <Divider />}
-                <ListItem>
-                  <ListItemText primary={restaurant.name} />
-                </ListItem>
-              </div>
-            ))}
-          </List>
-        </>
-      )}
+      <Typography variant="h5">Restaurants</Typography>
+      <List sx={{ bgcolor: 'lightgray' }}>
+        {restaurants.length === 0 && (
+          <div key="no-restaurant">
+            <ListItem>
+              <ListItemText primary="No Restaurant added yet." />
+            </ListItem>
+          </div>
+        )}
+        {restaurants.length > 0 &&
+          restaurants.map((restaurant, index) => (
+            <div key={restaurant.name}>
+              {index > 0 && index < restaurants.length && <Divider />}
+              <ListItem>
+                <ListItemText primary={restaurant.name} />
+              </ListItem>
+            </div>
+          ))}
+      </List>
     </Box>
   )
 }
