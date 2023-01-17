@@ -1,3 +1,4 @@
+import { Box, Button, TextField } from '@mui/material'
 import { useState } from 'react'
 
 type NewRestaurantFormProps = {
@@ -7,15 +8,26 @@ type NewRestaurantFormProps = {
 export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
   const [name, setName] = useState('')
 
+  const inputProps = {
+    'data-testid': 'newRetaurantName',
+  }
+
   return (
-    <div>
-      <input
-        type="text"
-        data-testid="newRetaurantName"
+    <Box
+      sx={{
+        display: 'flex',
+        gap: '.5rem',
+      }}
+    >
+      <TextField
+        variant="outlined"
+        label="Name"
+        inputProps={inputProps}
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button
+      <Button
+        variant="contained"
         onClick={() => {
           onSave({ name })
           setName('')
@@ -24,7 +36,7 @@ export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
         data-testid="saveNewRestaurantButton"
       >
         Save
-      </button>
-    </div>
+      </Button>
+    </Box>
   )
 }

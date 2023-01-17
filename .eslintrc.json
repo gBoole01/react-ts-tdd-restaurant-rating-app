@@ -22,7 +22,7 @@
       }
     ],
     "semi": "off",
-    "object-curly-newline": ["error", { "minProperties": 6 }],
+    "object-curly-newline": "off",
     "no-console": "off"
     // your custom rules here
   },
