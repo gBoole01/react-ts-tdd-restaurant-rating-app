@@ -3,9 +3,13 @@ import { useState } from 'react'
 
 type NewRestaurantFormProps = {
   onSave: ({ name }: { name: string }) => void
+  onCancel: () => void
 }
 
-export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
+export default function NewRestaurantForm({
+  onSave,
+  onCancel,
+}: NewRestaurantFormProps) {
   const [name, setName] = useState('')
 
   const inputProps = {
@@ -22,15 +26,26 @@ export default function NewRestaurantForm({ onSave }: NewRestaurantFormProps) {
     >
       <TextField
         variant="outlined"
-        sx={{ width: '70%' }}
+        sx={{ width: '60%' }}
         label="Name"
         inputProps={inputProps}
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <Button
+        variant="outlined"
+        sx={{ width: '20%' }}
+        onClick={() => {
+          onCancel()
+        }}
+        type="button"
+        data-testid="closeNewRestaurantModalButton"
+      >
+        Cancel
+      </Button>
+      <Button
         variant="contained"
-        sx={{ flexGrow: '1' }}
+        sx={{ width: '20%' }}
         onClick={() => {
           onSave({ name })
           setName('')
