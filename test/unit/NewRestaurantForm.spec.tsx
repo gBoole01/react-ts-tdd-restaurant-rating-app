@@ -11,13 +11,15 @@ describe('NewRestaurantForm', () => {
     <NewRestaurantForm onSave={saveHandler} onCancel={cancelHandler} />,
   )
   describe('clicking the save button', () => {
+    const input = getByTestId('newRetaurantName') as HTMLInputElement
+    const button = getByTestId('saveNewRestaurantButton')
+    fireEvent.change(input, { target: { value: 'Oshi Sushi' } })
+    fireEvent.click(button)
     test('calls the onSave handler', () => {
-      const input = getByTestId('newRetaurantName')
-      const button = getByTestId('saveNewRestaurantButton')
-      fireEvent.change(input, { target: { value: 'Oshi Sushi' } })
-      fireEvent.click(button)
-
       expect(saveHandler).toHaveBeenCalledWith({ name: 'Oshi Sushi' })
+    })
+    test('clears the text field', () => {
+      expect(input.value).toBe('')
     })
   })
   describe('clicking the cancel button', () => {
