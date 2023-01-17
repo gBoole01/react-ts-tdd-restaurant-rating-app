@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Box, Button, Modal } from '@mui/material'
 import { useState } from 'react'
 import NewRestaurantForm from './NewRestaurantForm'
 import RestaurantList from './RestaurantList'
@@ -9,11 +9,18 @@ export type Restaurant = {
 
 export default function RestaurantListPage() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-  const [showRestaurantForm, setShowRestaurantForm] = useState(false)
+  const [addRestaurantModalOpen, setAddRestaurantModalOpen] = useState(false)
 
   const onAddRestaurant = ({ name }: Restaurant) => {
     setRestaurants((prevRestaurants) => [...prevRestaurants, { name }])
-    setShowRestaurantForm(false)
+    setAddRestaurantModalOpen(false)
+  }
+
+  const handleOpen = () => {
+    setAddRestaurantModalOpen(true)
+  }
+  const handleClose = () => {
+    setAddRestaurantModalOpen(false)
   }
 
   return (
@@ -22,11 +29,33 @@ export default function RestaurantListPage() {
         variant="contained"
         type="button"
         data-testid="addRestaurantButton"
-        onClick={() => setShowRestaurantForm(!showRestaurantForm)}
+        onClick={handleOpen}
       >
         Add Restaurant
       </Button>
-      {showRestaurantForm && <NewRestaurantForm onSave={onAddRestaurant} />}
+      <Modal
+        open={addRestaurantModalOpen}
+        onClose={handleClose}
+        aria-labelledby="modal-add-restaurant"
+        aria-describedby="modal-add-restaurant"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'white',
+            border: '1px solid gray',
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <NewRestaurantForm onSave={onAddRestaurant} />
+        </Box>
+      </Modal>
       <RestaurantList restaurants={restaurants} />
     </>
   )
