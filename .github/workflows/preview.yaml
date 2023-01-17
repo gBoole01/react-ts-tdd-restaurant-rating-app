@@ -11,8 +11,6 @@ on:
     types:
       - completed
 
-needs: test
-
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
