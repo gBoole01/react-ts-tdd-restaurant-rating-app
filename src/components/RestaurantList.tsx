@@ -20,12 +20,12 @@ export default function RestaurantList({ restaurants }: RestaurantListProps) {
           <Typography variant="h5">Restaurants</Typography>
           <List sx={{ bgcolor: 'lightgray' }}>
             {restaurants.map((restaurant, index) => (
-              <>
+              <div key={restaurant.name}>
                 {index > 0 && index < restaurants.length && <Divider />}
-                <ListItem key={restaurant.name}>
+                <ListItem>
                   <ListItemText primary={restaurant.name} />
                 </ListItem>
-              </>
+              </div>
             ))}
           </List>
         </>
