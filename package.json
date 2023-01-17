@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 4173",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint cypress/e2e/**/*.ts src/**/*.{ts,tsx} test/**/*.{ts,tsx}",
