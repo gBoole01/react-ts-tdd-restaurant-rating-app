@@ -47,11 +47,11 @@ describe('adding a dish', () => {
     addRestaurant(restaurantName)
     goToRestaurantPage(restaurantName)
 
-    // shownElementsArePresentAtTheStart()
-    // hiddenElementsAreNotPresentAtTheStart()
+    shownElementsArePresentAtTheStart()
+    hiddenElementsAreNotPresentAtTheStart()
     // modalCanBeCancelled()
     // modalDisplaysValidationErrors()
 
-    modalAllowsAddingDish(dishName)
+    // modalAllowsAddingDish(dishName)
   })
 })
