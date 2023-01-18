@@ -1,4 +1,11 @@
-import { Box, Button, TextField } from '@mui/material'
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  OutlinedInput,
+} from '@mui/material'
 import { useFormik } from 'formik'
 
 type NewRestaurantFormProps = {
@@ -14,7 +21,7 @@ function CloseModalButton({ onCancel }: CloseModalButtonProps) {
   return (
     <Button
       variant="outlined"
-      sx={{ width: '20%' }}
+      sx={{ width: '50%' }}
       onClick={() => {
         onCancel()
       }}
@@ -34,6 +41,14 @@ export default function NewRestaurantForm({
   onSave,
   onCancel,
 }: NewRestaurantFormProps) {
+  const validate = (values: { name: string }) => {
+    const errors = {}
+    if (!values.name || values.name === '') {
+      return { ...errors, name: 'Cannot be blank' }
+    }
+    return errors
+  }
+
   const {
     values,
     touched,
@@ -46,6 +61,7 @@ export default function NewRestaurantForm({
     initialValues: {
       name: '',
     },
+    validate,
     onSubmit: (data, { resetForm }) => {
       onSave({ name: data.name })
       resetForm()
@@ -54,36 +70,42 @@ export default function NewRestaurantForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box
-        sx={{
-          display: 'flex',
-          gap: '.5rem',
-          width: '100%',
-        }}
-      >
-        <TextField
-          variant="outlined"
-          sx={{ width: '60%' }}
-          label="Name"
-          name="name"
-          id="name"
-          inputProps={inputProps}
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.name && Boolean(errors.name)}
-          helperText={touched.name && errors.name}
-        />
-        <CloseModalButton onCancel={onCancel} />
-        <Button
-          variant="contained"
-          sx={{ width: '20%' }}
-          type="submit"
-          disabled={isSubmitting}
-          data-testid="saveNewRestaurantButton"
-        >
-          Save
-        </Button>
+      <Box display="flex" flexDirection="column" alignItems="stretch">
+        <Box>
+          <FormControl fullWidth error={touched.name && Boolean(errors.name)}>
+            <InputLabel htmlFor="name">Name</InputLabel>
+            <OutlinedInput
+              id="name"
+              label="Name"
+              aria-describedby="name-error-text"
+              inputProps={inputProps}
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.name && touched.name && (
+              <FormHelperText
+                error
+                id="name-error-text"
+                data-testid="newRetaurantNameError"
+              >
+                {errors.name}
+              </FormHelperText>
+            )}
+          </FormControl>
+        </Box>
+        <Box display="flex" pt={1} gap={2}>
+          <CloseModalButton onCancel={onCancel} />
+          <Button
+            sx={{ width: '50%' }}
+            variant="contained"
+            type="submit"
+            disabled={isSubmitting}
+            data-testid="saveNewRestaurantButton"
+          >
+            Save
+          </Button>
+        </Box>
       </Box>
     </form>
   )

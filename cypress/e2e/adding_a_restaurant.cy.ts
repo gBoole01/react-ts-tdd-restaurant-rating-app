@@ -23,6 +23,12 @@ describe('adding a restaurant', () => {
     // Click on the Add Restaurant Button
     cy.get('[data-testid="addRestaurantButton"]').click()
 
+    // Click on the Save Restaurant Button
+    cy.get('[data-testid="saveNewRestaurantButton"]').click()
+
+    // Check that validation errors are shown
+    cy.get('[data-testid="newRetaurantNameError"]').contains('Cannot be blank')
+
     // Enter a Restaurant name in the input
     cy.get('[data-testid="newRetaurantName"]').type(restaurantName)
 
