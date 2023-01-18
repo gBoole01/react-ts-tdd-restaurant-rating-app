@@ -2,16 +2,9 @@ import { Box, Button, Modal } from '@mui/material'
 import { useState } from 'react'
 import NewRestaurantForm from '../components/NewRestaurantForm'
 import RestaurantList from '../components/RestaurantList'
-import type { Restaurant } from '../types'
 
 export default function RestaurantListPage() {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [addRestaurantModalOpen, setAddRestaurantModalOpen] = useState(false)
-
-  const onAddRestaurant = ({ name }: Restaurant) => {
-    setRestaurants((prevRestaurants) => [...prevRestaurants, { name }])
-    setAddRestaurantModalOpen(false)
-  }
 
   const handleOpen = () => {
     setAddRestaurantModalOpen(true)
@@ -50,10 +43,10 @@ export default function RestaurantListPage() {
             p: 4,
           }}
         >
-          <NewRestaurantForm onSave={onAddRestaurant} onCancel={handleClose} />
+          <NewRestaurantForm closeModal={handleClose} />
         </Box>
       </Modal>
-      <RestaurantList restaurants={restaurants} />
+      <RestaurantList />
     </>
   )
 }

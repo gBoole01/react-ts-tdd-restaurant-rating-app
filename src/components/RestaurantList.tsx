@@ -8,13 +8,9 @@ import {
   Typography,
 } from '@mui/material'
 import { Link } from 'react-router-dom'
-import type { Restaurant } from '../types'
+import { useRestaurants } from '../contexts/RestaurantsProvider'
 
-type RestaurantListProps = {
-  restaurants: Restaurant[]
-}
-
-const slugify = (...args: (string | number)[]): string => {
+export const slugifyRestaurantName = (...args: (string | number)[]): string => {
   const value = args.join(' ')
 
   return value
@@ -26,7 +22,9 @@ const slugify = (...args: (string | number)[]): string => {
     .replace(/\s+/g, '-') // separator
 }
 
-export default function RestaurantList({ restaurants }: RestaurantListProps) {
+export default function RestaurantList() {
+  const { restaurants } = useRestaurants()
+  console.warn(restaurants)
   return (
     <Box sx={{ width: '100%' }}>
       <Typography variant="h5">Restaurants</Typography>
@@ -45,7 +43,7 @@ export default function RestaurantList({ restaurants }: RestaurantListProps) {
               <ListItem>
                 <ListItemButton
                   component={Link}
-                  to={`/restaurants/${slugify(restaurant.name)}`}
+                  to={`/restaurants/${slugifyRestaurantName(restaurant.name)}`}
                 >
                   <ListItemText primary={restaurant.name} />
                 </ListItemButton>

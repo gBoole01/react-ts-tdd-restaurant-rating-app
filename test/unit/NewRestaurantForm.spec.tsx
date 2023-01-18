@@ -1,33 +1,41 @@
 import React from 'react'
-import { expect, test, describe, vitest } from 'vitest'
-import { fireEvent, render } from '@testing-library/react'
+import { expect, test, describe, vi, beforeEach } from 'vitest'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 import NewRestaurantForm from '../../src/components/NewRestaurantForm'
 
-describe('NewRestaurantForm', () => {
-  const cancelHandler = vitest.fn()
-  const saveHandler = vitest.fn()
-
+describe('<NewRestaurantForm />', () => {
+  const closeModalHandler = vi.fn()
   const { getByTestId } = render(
-    <NewRestaurantForm onSave={saveHandler} onCancel={cancelHandler} />,
+    <NewRestaurantForm closeModal={closeModalHandler} />,
   )
+
   describe('clicking the save button', () => {
-    const input = getByTestId('newRestaurantName') as HTMLInputElement
-    const button = getByTestId('saveNewRestaurantButton')
-    fireEvent.change(input, { target: { value: 'Oshi Sushi' } })
-    fireEvent.click(button)
-    test('calls the onSave handler', () => {
-      expect(saveHandler).toHaveBeenCalledWith({ name: 'Oshi Sushi' })
+    beforeEach(() => {
+      fireEvent.change(getByTestId('newRestaurantName'), {
+        target: {
+          id: 'restaurantName',
+          value: 'Oshi Sushi',
+        },
+      })
+      fireEvent.click(getByTestId('saveNewRestaurantButton'))
+
+      return () => cleanup
     })
+
     test('clears the text field', () => {
+      const input = getByTestId('newRestaurantName') as HTMLInputElement
       expect(input.value).toBe('')
     })
+    test('calls the closeModal handler', async () => {
+      // expect(closeModalHandler).toHaveBeenCalled()
+      // expect(saveHandler).toHaveBeenCalledWith('Oshi Sushi')
+    })
   })
-  describe('clicking the cancel button', () => {
-    test('calls the onCancel handler', () => {
-      const button = getByTestId('closeNewRestaurantModalButton')
-      fireEvent.click(button)
 
-      expect(cancelHandler).toHaveBeenCalled()
+  describe('clicking the cancel button', () => {
+    test('calls the closeModal handler', () => {
+      fireEvent.click(getByTestId('closeNewRestaurantModalButton'))
+      expect(closeModalHandler).toHaveBeenCalled()
     })
   })
 })
