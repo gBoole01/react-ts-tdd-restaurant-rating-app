@@ -11,7 +11,7 @@ describe('NewRestaurantForm', () => {
     <NewRestaurantForm onSave={saveHandler} onCancel={cancelHandler} />,
   )
   describe('clicking the save button', () => {
-    const input = getByTestId('newRetaurantName') as HTMLInputElement
+    const input = getByTestId('newRestaurantName') as HTMLInputElement
     const button = getByTestId('saveNewRestaurantButton')
     fireEvent.change(input, { target: { value: 'Oshi Sushi' } })
     fireEvent.click(button)
