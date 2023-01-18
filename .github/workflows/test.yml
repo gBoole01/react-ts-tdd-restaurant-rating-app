@@ -1,8 +1,5 @@
 name: Test
 
-outputs:
-  ref: ${{ env.GITHUB_REF }}
-
 on: [push]
 
 jobs:
