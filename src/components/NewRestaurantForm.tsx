@@ -48,7 +48,7 @@ export default function NewRestaurantForm({
     },
     onSubmit: (data, { resetForm }) => {
       onSave({ name: data.name })
-      resetForm({ values: { name: '' } })
+      resetForm()
     },
   })
 
