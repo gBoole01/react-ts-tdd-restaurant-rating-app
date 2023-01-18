@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import RestaurantDetailsPage from './pages/RestaurantDetailsPage'
 import RestaurantListPage from './pages/RestaurantListPage'
 import ErrorPage from './pages/ErrorPage'
+import { RestaurantsProvider } from './contexts/RestaurantsProvider'
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <Layout>
-      <RouterProvider router={router} />
-    </Layout>
+    <RestaurantsProvider>
+      <Layout>
+        <RouterProvider router={router} />
+      </Layout>
+    </RestaurantsProvider>
   )
 }

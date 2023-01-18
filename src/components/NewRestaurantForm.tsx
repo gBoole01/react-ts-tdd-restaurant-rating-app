@@ -7,10 +7,10 @@ import {
   OutlinedInput,
 } from '@mui/material'
 import { useFormik } from 'formik'
+import { useRestaurants } from '../contexts/RestaurantsProvider'
 
 type NewRestaurantFormProps = {
-  onSave: ({ name }: { name: string }) => void
-  onCancel: () => void
+  closeModal: () => void
 }
 
 type CloseModalButtonProps = {
@@ -38,9 +38,10 @@ const inputProps = {
 }
 
 export default function NewRestaurantForm({
-  onSave,
-  onCancel,
+  closeModal,
 }: NewRestaurantFormProps) {
+  const { createRestaurant } = useRestaurants()
+
   const validate = (values: { name: string }) => {
     const errors = {}
     if (!values.name || values.name === '') {
@@ -63,13 +64,14 @@ export default function NewRestaurantForm({
     },
     validate,
     onSubmit: (data, { resetForm }) => {
-      onSave({ name: data.name })
+      createRestaurant(data.name)
       resetForm()
+      closeModal()
     },
   })
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="newRestaurantForm">
       <Box display="flex" flexDirection="column" alignItems="stretch">
         <Box>
           <FormControl fullWidth error={touched.name && Boolean(errors.name)}>
@@ -95,7 +97,7 @@ export default function NewRestaurantForm({
           </FormControl>
         </Box>
         <Box display="flex" pt={1} gap={2}>
-          <CloseModalButton onCancel={onCancel} />
+          <CloseModalButton onCancel={closeModal} />
           <Button
             sx={{ width: '50%' }}
             variant="contained"
