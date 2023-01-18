@@ -1,44 +1,42 @@
 describe('adding a restaurant', () => {
+  function shownElementsArePresentAtTheStart() {
+    cy.get('[data-testid="addRestaurantButton"]').should('exist')
+  }
+
+  function hiddenElementsAreNotPresentAtTheStart() {
+    cy.get('[data-testid="newRestaurantName"]').should('not.exist')
+  }
+
+  function modalCanBeCancelled() {
+    cy.get('[data-testid="addRestaurantButton"]').click()
+    cy.get('[data-testid="closeNewRestaurantModalButton"]').click()
+    cy.get('[data-testid="newRestaurantName"]').should('not.exist')
+  }
+
+  function modalDisplaysValidationErrors() {
+    cy.get('[data-testid="addRestaurantButton"]').click()
+    cy.get('[data-testid="saveNewRestaurantButton"]').click()
+    cy.get('[data-testid="newRestaurantNameError"]').contains('Cannot be blank')
+    cy.get('[data-testid="closeNewRestaurantModalButton"]').click()
+  }
+
+  function modalAllowsAddingRestaurant(restaurantName: string) {
+    cy.get('[data-testid="addRestaurantButton"]').click()
+    cy.get('[data-testid="newRestaurantName"]').type(restaurantName)
+    cy.get('[data-testid="saveNewRestaurantButton"]').click()
+    cy.get('[data-testid="newRestaurantName"]').should('not.exist')
+    cy.contains(restaurantName)
+  }
+
   it('displays the restaurant in the list', () => {
     const restaurantName = 'Oshi Sushi'
 
-    // Go to Homepage
     cy.visit('http://localhost:4173')
 
-    // Check that the Add Restaurant Button is shown
-    cy.get('[data-testid="addRestaurantButton"]').should('exist')
-
-    // Check that the Input field not shown
-    cy.get('[data-testid="newRetaurantName"]').should('not.exist')
-
-    // Click on the Add Restaurant Button
-    cy.get('[data-testid="addRestaurantButton"]').click()
-
-    // Click on the Cancel Add Restaurant Button
-    cy.get('[data-testid="closeNewRestaurantModalButton"]').click()
-
-    // Check that the Input field not shown
-    cy.get('[data-testid="newRetaurantName"]').should('not.exist')
-
-    // Click on the Add Restaurant Button
-    cy.get('[data-testid="addRestaurantButton"]').click()
-
-    // Click on the Save Restaurant Button
-    cy.get('[data-testid="saveNewRestaurantButton"]').click()
-
-    // Check that validation errors are shown
-    cy.get('[data-testid="newRetaurantNameError"]').contains('Cannot be blank')
-
-    // Enter a Restaurant name in the input
-    cy.get('[data-testid="newRetaurantName"]').type(restaurantName)
-
-    // Click on the Save Restaurant Button
-    cy.get('[data-testid="saveNewRestaurantButton"]').click()
-
-    // Check that the Input field not shown
-    cy.get('[data-testid="newRetaurantName"]').should('not.exist')
-
-    // Expect the new Restaurant name is on the page
-    cy.contains(restaurantName)
+    shownElementsArePresentAtTheStart()
+    hiddenElementsAreNotPresentAtTheStart()
+    modalCanBeCancelled()
+    modalDisplaysValidationErrors()
+    modalAllowsAddingRestaurant(restaurantName)
   })
 })

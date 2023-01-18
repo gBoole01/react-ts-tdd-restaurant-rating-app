@@ -3,13 +3,27 @@ import {
   Divider,
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
   Typography,
 } from '@mui/material'
-import { Restaurant } from './RestaurantListPage'
+import { Link } from 'react-router-dom'
+import type { Restaurant } from '../types'
 
 type RestaurantListProps = {
   restaurants: Restaurant[]
+}
+
+const slugify = (...args: (string | number)[]): string => {
+  const value = args.join(' ')
+
+  return value
+    .normalize('NFD') // split an accented letter in the base letter and the acent
+    .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 ]/g, '') // remove all chars not letters, numbers and spaces (to be replaced)
+    .replace(/\s+/g, '-') // separator
 }
 
 export default function RestaurantList({ restaurants }: RestaurantListProps) {
@@ -29,7 +43,12 @@ export default function RestaurantList({ restaurants }: RestaurantListProps) {
             <div key={restaurant.name}>
               {index > 0 && index < restaurants.length && <Divider />}
               <ListItem>
-                <ListItemText primary={restaurant.name} />
+                <ListItemButton
+                  component={Link}
+                  to={`/restaurants/${slugify(restaurant.name)}`}
+                >
+                  <ListItemText primary={restaurant.name} />
+                </ListItemButton>
               </ListItem>
             </div>
           ))}

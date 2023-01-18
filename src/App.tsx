@@ -1,30 +1,25 @@
-import { Box, Container } from '@mui/material'
-import RestaurantListPage from './components/RestaurantListPage'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Layout from './components/Layout'
+import RestaurantDetailsPage from './pages/RestaurantDetailsPage'
+import RestaurantListPage from './pages/RestaurantListPage'
+import ErrorPage from './pages/ErrorPage'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RestaurantListPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/restaurants/:slug',
+    element: <RestaurantDetailsPage />,
+  },
+])
 
 export default function App() {
   return (
-    <Container
-      sx={{
-        bgcolor: 'darkgray',
-        height: '100%',
-        p: '1rem',
-      }}
-    >
-      <Box
-        sx={{
-          bgcolor: 'white',
-          boxShadow: 1,
-          borderRadius: 2,
-          p: 2,
-          minWidth: 300,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          gap: '1rem',
-        }}
-      >
-        <RestaurantListPage />
-      </Box>
-    </Container>
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
   )
 }

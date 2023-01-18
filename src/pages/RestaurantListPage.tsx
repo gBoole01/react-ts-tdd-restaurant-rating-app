@@ -1,11 +1,8 @@
 import { Box, Button, Modal } from '@mui/material'
 import { useState } from 'react'
-import NewRestaurantForm from './NewRestaurantForm'
-import RestaurantList from './RestaurantList'
-
-export type Restaurant = {
-  name: string
-}
+import NewRestaurantForm from '../components/NewRestaurantForm'
+import RestaurantList from '../components/RestaurantList'
+import type { Restaurant } from '../types'
 
 export default function RestaurantListPage() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])

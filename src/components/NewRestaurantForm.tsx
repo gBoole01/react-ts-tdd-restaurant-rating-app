@@ -34,7 +34,7 @@ function CloseModalButton({ onCancel }: CloseModalButtonProps) {
 }
 
 const inputProps = {
-  'data-testid': 'newRetaurantName',
+  'data-testid': 'newRestaurantName',
 }
 
 export default function NewRestaurantForm({
@@ -87,7 +87,7 @@ export default function NewRestaurantForm({
               <FormHelperText
                 error
                 id="name-error-text"
-                data-testid="newRetaurantNameError"
+                data-testid="newRestaurantNameError"
               >
                 {errors.name}
               </FormHelperText>
