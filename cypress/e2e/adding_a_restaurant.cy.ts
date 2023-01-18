@@ -20,7 +20,7 @@ describe('adding a restaurant', () => {
     cy.get('[data-testid="closeNewRestaurantModalButton"]').click()
   }
 
-  function addRestaurant(restaurantName: string) {
+  function modalAllowsAddingRestaurant(restaurantName: string) {
     cy.get('[data-testid="addRestaurantButton"]').click()
     cy.get('[data-testid="newRestaurantName"]').type(restaurantName)
     cy.get('[data-testid="saveNewRestaurantButton"]').click()
@@ -37,6 +37,6 @@ describe('adding a restaurant', () => {
     hiddenElementsAreNotPresentAtTheStart()
     modalCanBeCancelled()
     modalDisplaysValidationErrors()
-    addRestaurant(restaurantName)
+    modalAllowsAddingRestaurant(restaurantName)
   })
 })
