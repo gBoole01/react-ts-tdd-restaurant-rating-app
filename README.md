@@ -41,6 +41,6 @@ The application is deployed on Vercel and the CI/CD is handled by GitHub Actions
 
 If you're interested in contributing to this project, please feel free to open an issue or pull request.
 
-## Acknowledgements
+## Acknowledgements 🙌
 
 Thanks to the developers of React, TypeScript, Material UI, Formik, React Router, Cypress.io, Vitest, Vite, ESLint and Vercel for creating such amazing tools and libraries.
