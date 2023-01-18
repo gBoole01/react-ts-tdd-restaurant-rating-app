@@ -45,7 +45,7 @@ export default function RestaurantListPage() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: 450,
             bgcolor: 'white',
             border: '1px solid gray',
             borderRadius: 2,
@@ -53,7 +53,7 @@ export default function RestaurantListPage() {
             p: 4,
           }}
         >
-          <NewRestaurantForm onSave={onAddRestaurant} />
+          <NewRestaurantForm onSave={onAddRestaurant} onCancel={handleClose} />
         </Box>
       </Modal>
       <RestaurantList restaurants={restaurants} />
