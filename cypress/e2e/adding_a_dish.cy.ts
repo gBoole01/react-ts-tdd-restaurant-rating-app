@@ -18,30 +18,46 @@ describe('adding a dish', () => {
     cy.get('[data-testid="newDishName"]').should('not.exist')
   }
 
-  // function modalCanBeCancelled() {
-  //   cy.get('[data-testid="addDishButton"]').click()
-  //   cy.get('[data-testid="closeNewDishModalButton"]').click()
-  //   cy.get('[data-testid="newDishName"]').should('not.exist')
-  // }
+  function modalCanBeCancelled() {
+    cy.get('[data-testid="addDishButton"]').click()
+    cy.get('[data-testid="closeNewDishModalButton"]').click()
+    cy.get('[data-testid="newDishName"]').should('not.exist')
+  }
 
-  // function modalDisplaysValidationErrors() {
-  //   cy.get('[data-testid="addDishButton"]').click()
-  //   cy.get('[data-testid="saveNewDishButton"]').click()
-  //   cy.get('[data-testid="newDishNameError"]').contains('Cannot be blank')
-  //   cy.get('[data-testid="closeNewDishModalButton"]').click()
-  // }
+  function modalDisplaysValidationErrors() {
+    cy.get('[data-testid="addDishButton"]').click()
+    cy.get('[data-testid="saveNewDishButton"]').click()
+    cy.get('[data-testid="newDishNameError"]').contains('Cannot be blank')
+    cy.get('[data-testid="closeNewDishModalButton"]').click()
+  }
 
-  // function modalAllowsAddingDish(dishName: string) {
-  //   cy.get('[data-testid="addDishButton"]').click()
-  //   cy.get('[data-testid="newDishName"]').type(dishName)
-  //   cy.get('[data-testid="saveNewDishButton"]').click()
-  //   cy.get('[data-testid="newDishName"]').should('not.exist')
-  //   cy.contains(dishName)
-  // }
+  function addDish(dishName: string) {
+    cy.get('[data-testid="addDishButton"]').click()
+    cy.get('[data-testid="newDishName"]').type(dishName)
+    cy.get('[data-testid="saveNewDishButton"]').click()
+    cy.get('[data-testid="newDishName"]').should('not.exist')
+  }
+
+  function modalAllowsAddingDish(dishName: string) {
+    addDish(dishName)
+    cy.contains(dishName)
+  }
+
+  function backButtonAllowsGoingToPreviousPage(restaurantName: string) {
+    cy.get('[data-testid="backButton"]').click()
+    cy.contains(restaurantName).click()
+  }
+
+  function dishesPersistedWhenRefreshing(dishName: string) {
+    addDish(dishName)
+    cy.reload()
+    cy.contains(dishName)
+  }
 
   it('displays the dish in the list', () => {
     const restaurantName = 'Oshi Sushi'
-    // const dishName = 'Menu E - "Duo"'
+    const dishName = 'Menu E - "Duo"'
+    const otherDishName = 'Gyozas *5'
 
     cy.visit('http://localhost:4173')
 
@@ -50,9 +66,11 @@ describe('adding a dish', () => {
 
     shownElementsArePresentAtTheStart(restaurantName)
     hiddenElementsAreNotPresentAtTheStart()
-    // modalCanBeCancelled()
-    // modalDisplaysValidationErrors()
 
-    // modalAllowsAddingDish(dishName)
+    // backButtonAllowsGoingToPreviousPage(restaurantName)
+    modalCanBeCancelled()
+    modalDisplaysValidationErrors()
+    modalAllowsAddingDish(dishName)
+    // dishesPersistedWhenRefreshing(otherDishName)
   })
 })

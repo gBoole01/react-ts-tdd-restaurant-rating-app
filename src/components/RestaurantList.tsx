@@ -7,8 +7,9 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
-import { Link } from 'react-router-dom'
-import { useRestaurants } from '../contexts/RestaurantsProvider'
+import { Link, useLocation } from 'react-router-dom'
+import { useAppSelector as useSelector } from '../store/hooks'
+import { selectRestaurants } from '../store/restaurants/restaurantsSlice'
 
 export const slugifyRestaurantName = (...args: (string | number)[]): string => {
   const value = args.join(' ')
@@ -23,8 +24,9 @@ export const slugifyRestaurantName = (...args: (string | number)[]): string => {
 }
 
 export default function RestaurantList() {
-  const { restaurants } = useRestaurants()
-  console.warn(restaurants)
+  const location = useLocation()
+  const restaurants = useSelector(selectRestaurants)
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography variant="h5">Restaurants</Typography>
@@ -44,6 +46,7 @@ export default function RestaurantList() {
                 <ListItemButton
                   component={Link}
                   to={`/restaurants/${slugifyRestaurantName(restaurant.name)}`}
+                  state={{ from: location }}
                 >
                   <ListItemText primary={restaurant.name} />
                 </ListItemButton>

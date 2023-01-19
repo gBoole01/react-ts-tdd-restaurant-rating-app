@@ -1,9 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import Layout from './components/Layout'
 import RestaurantDetailsPage from './pages/RestaurantDetailsPage'
 import RestaurantListPage from './pages/RestaurantListPage'
 import ErrorPage from './pages/ErrorPage'
-import { RestaurantsProvider } from './contexts/RestaurantsProvider'
+import store from './store/store'
 
 const router = createBrowserRouter([
   {
@@ -19,10 +20,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <RestaurantsProvider>
+    <Provider store={store}>
       <Layout>
         <RouterProvider router={router} />
       </Layout>
-    </RestaurantsProvider>
+    </Provider>
   )
 }
