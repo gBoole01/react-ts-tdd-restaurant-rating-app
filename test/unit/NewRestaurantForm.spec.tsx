@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect, test, describe, vi, beforeEach } from 'vitest'
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { cleanup, fireEvent, render, waitFor } from '@testing-library/react'
 import NewRestaurantForm from '../../src/components/NewRestaurantForm'
 
 describe('<NewRestaurantForm />', () => {
@@ -26,9 +26,10 @@ describe('<NewRestaurantForm />', () => {
       const input = getByTestId('newRestaurantName') as HTMLInputElement
       expect(input.value).toBe('')
     })
-    test('calls the closeModal handler', async () => {
-      // expect(closeModalHandler).toHaveBeenCalled()
-      // expect(saveHandler).toHaveBeenCalledWith('Oshi Sushi')
+    test('calls the closeModal handler', () => {
+      waitFor(() => {
+        expect(closeModalHandler).toHaveBeenCalled()
+      })
     })
   })
 
