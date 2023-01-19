@@ -20,16 +20,27 @@ describe('adding a restaurant', () => {
     cy.get('[data-testid="closeNewRestaurantModalButton"]').click()
   }
 
-  function modalAllowsAddingRestaurant(restaurantName: string) {
+  function addRestaurant(restaurantName: string) {
     cy.get('[data-testid="addRestaurantButton"]').click()
     cy.get('[data-testid="newRestaurantName"]').type(restaurantName)
     cy.get('[data-testid="saveNewRestaurantButton"]').click()
     cy.get('[data-testid="newRestaurantName"]').should('not.exist')
+  }
+
+  function modalAllowsAddingRestaurant(restaurantName: string) {
+    addRestaurant(restaurantName)
+    cy.contains(restaurantName)
+  }
+
+  function restaurantPersistedWhenRefreshing(restaurantName: string) {
+    addRestaurant(restaurantName)
+    cy.reload()
     cy.contains(restaurantName)
   }
 
   it('displays the restaurant in the list', () => {
     const restaurantName = 'Oshi Sushi'
+    const otherRestaurantName = 'Kokomo Burger'
 
     cy.visit('http://localhost:4173')
 
@@ -38,5 +49,6 @@ describe('adding a restaurant', () => {
     modalCanBeCancelled()
     modalDisplaysValidationErrors()
     modalAllowsAddingRestaurant(restaurantName)
+    restaurantPersistedWhenRefreshing(otherRestaurantName)
   })
 })
