@@ -1,6 +1,8 @@
-import { Button, Typography } from '@mui/material'
+import { Box, Button, Modal, Typography } from '@mui/material'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { slugifyRestaurantName } from '../components/RestaurantList'
+import NewDishForm from '../components/NewDishForm'
 import { useRestaurants } from '../contexts/RestaurantsProvider'
 import ErrorPage from './ErrorPage'
 
@@ -10,11 +12,15 @@ export default function RestaurantDetailsPage() {
   const restaurant = restaurants.find(
     (r) => slugifyRestaurantName(r.name) === slug,
   )
-
   if (!restaurant) return <ErrorPage />
 
+  const [addDishModalOpen, setAddDishModalOpen] = useState(false)
+
   const handleOpen = () => {
-    console.log('handleOpenCalled')
+    setAddDishModalOpen(true)
+  }
+  const handleClose = () => {
+    setAddDishModalOpen(false)
   }
 
   return (
@@ -27,6 +33,29 @@ export default function RestaurantDetailsPage() {
       >
         Add Dish
       </Button>
+      <Modal
+        open={addDishModalOpen}
+        onClose={handleClose}
+        aria-labelledby="modal-add-dish"
+        aria-describedby="modal-add-dish"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 450,
+            bgcolor: 'white',
+            border: '1px solid gray',
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <NewDishForm closeModal={handleClose} />
+        </Box>
+      </Modal>
       <Typography variant="h5" data-testid="headingRestaurantName">
         {restaurant.name}
       </Typography>

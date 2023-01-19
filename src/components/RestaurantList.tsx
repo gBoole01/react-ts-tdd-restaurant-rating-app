@@ -24,7 +24,6 @@ export const slugifyRestaurantName = (...args: (string | number)[]): string => {
 
 export default function RestaurantList() {
   const { restaurants } = useRestaurants()
-  console.warn(restaurants)
   return (
     <Box sx={{ width: '100%' }}>
       <Typography variant="h5">Restaurants</Typography>

@@ -18,30 +18,30 @@ describe('adding a dish', () => {
     cy.get('[data-testid="newDishName"]').should('not.exist')
   }
 
-  // function modalCanBeCancelled() {
-  //   cy.get('[data-testid="addDishButton"]').click()
-  //   cy.get('[data-testid="closeNewDishModalButton"]').click()
-  //   cy.get('[data-testid="newDishName"]').should('not.exist')
-  // }
+  function modalCanBeCancelled() {
+    cy.get('[data-testid="addDishButton"]').click()
+    cy.get('[data-testid="closeNewDishModalButton"]').click()
+    cy.get('[data-testid="newDishName"]').should('not.exist')
+  }
 
-  // function modalDisplaysValidationErrors() {
-  //   cy.get('[data-testid="addDishButton"]').click()
-  //   cy.get('[data-testid="saveNewDishButton"]').click()
-  //   cy.get('[data-testid="newDishNameError"]').contains('Cannot be blank')
-  //   cy.get('[data-testid="closeNewDishModalButton"]').click()
-  // }
+  function modalDisplaysValidationErrors() {
+    cy.get('[data-testid="addDishButton"]').click()
+    cy.get('[data-testid="saveNewDishButton"]').click()
+    cy.get('[data-testid="newDishNameError"]').contains('Cannot be blank')
+    cy.get('[data-testid="closeNewDishModalButton"]').click()
+  }
 
-  // function modalAllowsAddingDish(dishName: string) {
-  //   cy.get('[data-testid="addDishButton"]').click()
-  //   cy.get('[data-testid="newDishName"]').type(dishName)
-  //   cy.get('[data-testid="saveNewDishButton"]').click()
-  //   cy.get('[data-testid="newDishName"]').should('not.exist')
-  //   cy.contains(dishName)
-  // }
+  function modalAllowsAddingDish(dishName: string) {
+    cy.get('[data-testid="addDishButton"]').click()
+    cy.get('[data-testid="newDishName"]').type(dishName)
+    cy.get('[data-testid="saveNewDishButton"]').click()
+    cy.get('[data-testid="newDishName"]').should('not.exist')
+    // cy.contains(dishName)
+  }
 
   it('displays the dish in the list', () => {
     const restaurantName = 'Oshi Sushi'
-    // const dishName = 'Menu E - "Duo"'
+    const dishName = 'Menu E - "Duo"'
 
     cy.visit('http://localhost:4173')
 
@@ -50,9 +50,9 @@ describe('adding a dish', () => {
 
     shownElementsArePresentAtTheStart(restaurantName)
     hiddenElementsAreNotPresentAtTheStart()
-    // modalCanBeCancelled()
-    // modalDisplaysValidationErrors()
+    modalCanBeCancelled()
+    modalDisplaysValidationErrors()
 
-    // modalAllowsAddingDish(dishName)
+    modalAllowsAddingDish(dishName)
   })
 })

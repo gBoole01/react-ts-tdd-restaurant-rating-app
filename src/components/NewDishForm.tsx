@@ -7,9 +7,8 @@ import {
   OutlinedInput,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import { useRestaurants } from '../contexts/RestaurantsProvider'
 
-type NewRestaurantFormProps = {
+type NewDishFormProps = {
   closeModal: () => void
 }
 
@@ -26,7 +25,7 @@ function CloseModalButton({ onCancel }: CloseModalButtonProps) {
         onCancel()
       }}
       type="button"
-      data-testid="closeNewRestaurantModalButton"
+      data-testid="closeNewDishModalButton"
     >
       Cancel
     </Button>
@@ -34,14 +33,10 @@ function CloseModalButton({ onCancel }: CloseModalButtonProps) {
 }
 
 const inputProps = {
-  'data-testid': 'newRestaurantName',
+  'data-testid': 'newDishName',
 }
 
-export default function NewRestaurantForm({
-  closeModal,
-}: NewRestaurantFormProps) {
-  const { createRestaurant } = useRestaurants()
-
+export default function NewDishForm({ closeModal }: NewDishFormProps) {
   const validate = (values: { name: string }) => {
     const errors = {}
     if (!values.name || values.name === '') {
@@ -64,7 +59,7 @@ export default function NewRestaurantForm({
     },
     validate,
     onSubmit: (data, { resetForm }) => {
-      createRestaurant(data.name)
+      console.log(data.name)
       resetForm()
       closeModal()
     },
@@ -89,7 +84,7 @@ export default function NewRestaurantForm({
               <FormHelperText
                 error
                 id="name-error-text"
-                data-testid="newRestaurantNameError"
+                data-testid="newDishNameError"
               >
                 {errors.name}
               </FormHelperText>
@@ -103,7 +98,7 @@ export default function NewRestaurantForm({
             variant="contained"
             type="submit"
             disabled={isSubmitting}
-            data-testid="saveNewRestaurantButton"
+            data-testid="saveNewDishButton"
           >
             Save
           </Button>
