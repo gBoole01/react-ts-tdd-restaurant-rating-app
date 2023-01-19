@@ -36,7 +36,7 @@ describe('adding a dish', () => {
     cy.get('[data-testid="newDishName"]').type(dishName)
     cy.get('[data-testid="saveNewDishButton"]').click()
     cy.get('[data-testid="newDishName"]').should('not.exist')
-    // cy.contains(dishName)
+    cy.contains(dishName)
   }
 
   it('displays the dish in the list', () => {

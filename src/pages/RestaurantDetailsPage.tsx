@@ -1,10 +1,12 @@
-import { Box, Button, Modal, Typography } from '@mui/material'
+import { Box, Button, Modal } from '@mui/material'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { slugifyRestaurantName } from '../components/RestaurantList'
 import NewDishForm from '../components/NewDishForm'
 import { useRestaurants } from '../contexts/RestaurantsProvider'
 import ErrorPage from './ErrorPage'
+import type { Dish } from '../types'
+import DishList from '../components/DishList'
 
 export default function RestaurantDetailsPage() {
   const { restaurants } = useRestaurants()
@@ -15,6 +17,11 @@ export default function RestaurantDetailsPage() {
   if (!restaurant) return <ErrorPage />
 
   const [addDishModalOpen, setAddDishModalOpen] = useState(false)
+  const [dishes, setDishes] = useState<Dish[]>([])
+
+  const addNewDish = (name: string) => {
+    setDishes((prevDishes) => [...prevDishes, { name }])
+  }
 
   const handleOpen = () => {
     setAddDishModalOpen(true)
@@ -53,12 +60,10 @@ export default function RestaurantDetailsPage() {
             p: 4,
           }}
         >
-          <NewDishForm closeModal={handleClose} />
+          <NewDishForm closeModal={handleClose} addNewDish={addNewDish} />
         </Box>
       </Modal>
-      <Typography variant="h5" data-testid="headingRestaurantName">
-        {restaurant.name}
-      </Typography>
+      <DishList restaurantName={restaurant.name} dishes={dishes} />
     </>
   )
 }

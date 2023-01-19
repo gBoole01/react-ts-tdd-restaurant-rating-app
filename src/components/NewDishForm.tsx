@@ -10,6 +10,7 @@ import { useFormik } from 'formik'
 
 type NewDishFormProps = {
   closeModal: () => void
+  addNewDish: (name: string) => void
 }
 
 type CloseModalButtonProps = {
@@ -36,7 +37,10 @@ const inputProps = {
   'data-testid': 'newDishName',
 }
 
-export default function NewDishForm({ closeModal }: NewDishFormProps) {
+export default function NewDishForm({
+  closeModal,
+  addNewDish,
+}: NewDishFormProps) {
   const validate = (values: { name: string }) => {
     const errors = {}
     if (!values.name || values.name === '') {
@@ -59,7 +63,7 @@ export default function NewDishForm({ closeModal }: NewDishFormProps) {
     },
     validate,
     onSubmit: (data, { resetForm }) => {
-      console.log(data.name)
+      addNewDish(data.name)
       resetForm()
       closeModal()
     },
