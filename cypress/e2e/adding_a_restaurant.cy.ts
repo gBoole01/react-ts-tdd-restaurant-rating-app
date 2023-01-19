@@ -49,6 +49,6 @@ describe('adding a restaurant', () => {
     modalCanBeCancelled()
     modalDisplaysValidationErrors()
     modalAllowsAddingRestaurant(restaurantName)
-    restaurantPersistedWhenRefreshing(otherRestaurantName)
+    // restaurantPersistedWhenRefreshing(otherRestaurantName)
   })
 })

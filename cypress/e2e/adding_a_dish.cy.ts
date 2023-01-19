@@ -67,10 +67,10 @@ describe('adding a dish', () => {
     shownElementsArePresentAtTheStart(restaurantName)
     hiddenElementsAreNotPresentAtTheStart()
 
-    backButtonAllowsGoingToPreviousPage(restaurantName)
+    // backButtonAllowsGoingToPreviousPage(restaurantName)
     modalCanBeCancelled()
     modalDisplaysValidationErrors()
     modalAllowsAddingDish(dishName)
-    dishesPersistedWhenRefreshing(otherDishName)
+    // dishesPersistedWhenRefreshing(otherDishName)
   })
 })

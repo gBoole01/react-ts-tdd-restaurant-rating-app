@@ -7,7 +7,8 @@ import {
   OutlinedInput,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import { useRestaurants } from '../contexts/RestaurantsProvider'
+import { useDispatch } from 'react-redux'
+import { addRestaurant } from '../store/restaurants/restaurantsSlice'
 
 type NewRestaurantFormProps = {
   closeModal: () => void
@@ -40,7 +41,7 @@ const inputProps = {
 export default function NewRestaurantForm({
   closeModal,
 }: NewRestaurantFormProps) {
-  const { createRestaurant } = useRestaurants()
+  const dispatch = useDispatch()
 
   const validate = (values: { name: string }) => {
     const errors = {}
@@ -64,7 +65,7 @@ export default function NewRestaurantForm({
     },
     validate,
     onSubmit: (data, { resetForm }) => {
-      createRestaurant(data.name)
+      dispatch(addRestaurant({ name: data.name }))
       resetForm()
       closeModal()
     },

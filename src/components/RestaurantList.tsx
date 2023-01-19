@@ -7,8 +7,13 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
+import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { useRestaurants } from '../contexts/RestaurantsProvider'
+import {
+  RestaurantsState,
+  selectRestaurants,
+} from '../store/restaurants/restaurantsSlice'
+import type { Restaurant } from '../types'
 
 export const slugifyRestaurantName = (...args: (string | number)[]): string => {
   const value = args.join(' ')
@@ -24,7 +29,11 @@ export const slugifyRestaurantName = (...args: (string | number)[]): string => {
 
 export default function RestaurantList() {
   const location = useLocation()
-  const { restaurants } = useRestaurants()
+  const restaurantsState = (useSelector(
+    selectRestaurants,
+  ) as unknown) as RestaurantsState
+  const restaurants: Restaurant[] = restaurantsState.restaurants || []
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography variant="h5">Restaurants</Typography>
