@@ -7,6 +7,7 @@ import { useRestaurants } from '../contexts/RestaurantsProvider'
 import ErrorPage from './ErrorPage'
 import type { Dish } from '../types'
 import DishList from '../components/DishList'
+import BackButton from '../components/BackButton'
 
 export default function RestaurantDetailsPage() {
   const { restaurants } = useRestaurants()
@@ -32,14 +33,17 @@ export default function RestaurantDetailsPage() {
 
   return (
     <>
-      <Button
-        variant="contained"
-        type="button"
-        data-testid="addDishButton"
-        onClick={handleOpen}
-      >
-        Add Dish
-      </Button>
+      <Box display="flex" gap={1}>
+        <BackButton />
+        <Button
+          variant="contained"
+          type="button"
+          data-testid="addDishButton"
+          onClick={handleOpen}
+        >
+          Add Dish
+        </Button>
+      </Box>
       <Modal
         open={addDishModalOpen}
         onClose={handleClose}
