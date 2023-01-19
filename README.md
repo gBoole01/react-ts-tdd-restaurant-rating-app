@@ -13,6 +13,7 @@ This project follows the Test-Driven Development (TDD) approach, specifically th
 - React
 - MaterialUI
 - React Router
+- Redux
 - Formik
 - Cypress.io
 - Vitest & React Testing Library
@@ -43,4 +44,4 @@ If you're interested in contributing to this project, please feel free to open a
 
 ## Acknowledgements 🙌
 
-Thanks to the developers of React, TypeScript, Material UI, Formik, React Router, Cypress.io, Vitest, Vite, ESLint and Vercel for creating such amazing tools and libraries.
+Thanks to the developers of React, TypeScript, Material UI, Formik, React Router, Redux, Cypress.io, Vitest, Vite, ESLint and Vercel for creating such amazing tools and libraries.

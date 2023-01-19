@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { Restaurant } from '../../types'
+import { RootState } from '../store'
 
-export type RestaurantsState = {
+type RestaurantsState = {
   restaurants: Restaurant[]
 }
 
@@ -23,5 +24,6 @@ const restaurantsSlice = createSlice({
 })
 
 export const { addRestaurant } = restaurantsSlice.actions
-export const selectRestaurants = (state: RestaurantsState) => state.restaurants
+export const selectRestaurants = (state: RootState) =>
+  state.restaurants.restaurants
 export default restaurantsSlice.reducer

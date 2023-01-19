@@ -1,23 +1,17 @@
 import { Box, Button, Modal } from '@mui/material'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { slugifyRestaurantName } from '../components/RestaurantList'
 import NewDishForm from '../components/NewDishForm'
 import ErrorPage from './ErrorPage'
-import type { Dish, Restaurant } from '../types'
+import type { Dish } from '../types'
 import DishList from '../components/DishList'
 import BackButton from '../components/BackButton'
-import {
-  RestaurantsState,
-  selectRestaurants,
-} from '../store/restaurants/restaurantsSlice'
+import { useAppSelector as useSelector } from '../store/hooks'
+import { selectRestaurants } from '../store/restaurants/restaurantsSlice'
 
 export default function RestaurantDetailsPage() {
-  const restaurantsState = (useSelector(
-    selectRestaurants,
-  ) as unknown) as RestaurantsState
-  const restaurants: Restaurant[] = restaurantsState.restaurants || []
+  const restaurants = useSelector(selectRestaurants)
 
   const { slug } = useParams()
   const restaurant = restaurants.find(

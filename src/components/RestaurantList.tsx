@@ -7,13 +7,9 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
-import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import {
-  RestaurantsState,
-  selectRestaurants,
-} from '../store/restaurants/restaurantsSlice'
-import type { Restaurant } from '../types'
+import { useAppSelector as useSelector } from '../store/hooks'
+import { selectRestaurants } from '../store/restaurants/restaurantsSlice'
 
 export const slugifyRestaurantName = (...args: (string | number)[]): string => {
   const value = args.join(' ')
@@ -29,10 +25,7 @@ export const slugifyRestaurantName = (...args: (string | number)[]): string => {
 
 export default function RestaurantList() {
   const location = useLocation()
-  const restaurantsState = (useSelector(
-    selectRestaurants,
-  ) as unknown) as RestaurantsState
-  const restaurants: Restaurant[] = restaurantsState.restaurants || []
+  const restaurants = useSelector(selectRestaurants)
 
   return (
     <Box sx={{ width: '100%' }}>
