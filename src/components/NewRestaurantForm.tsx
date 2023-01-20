@@ -7,8 +7,8 @@ import {
   OutlinedInput,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux'
-import { addRestaurant } from '../store/restaurants/restaurantsSlice'
+import { useAppDispatch as useDispatch } from '../store/hooks'
+import { addRestaurant } from '../store/restaurantsSlice'
 
 type NewRestaurantFormProps = {
   closeModal: () => void

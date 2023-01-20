@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { Restaurant } from '../../types'
-import { RootState } from '../store'
+import type { Restaurant } from '../types'
+import { RootState } from './store'
 
 type RestaurantsState = {
   restaurants: Restaurant[]
@@ -15,7 +15,6 @@ const restaurantsSlice = createSlice({
   initialState,
   reducers: {
     addRestaurant: (state, action: PayloadAction<Restaurant>) => {
-      console.log(action)
       state.restaurants.push({
         name: action.payload.name,
       })

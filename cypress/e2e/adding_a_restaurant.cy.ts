@@ -32,15 +32,15 @@ describe('adding a restaurant', () => {
     cy.contains(restaurantName)
   }
 
-  function restaurantPersistedWhenRefreshing(restaurantName: string) {
-    addRestaurant(restaurantName)
-    cy.reload()
-    cy.contains(restaurantName)
-  }
+  // function restaurantPersistedWhenRefreshing(restaurantName: string) {
+  //   addRestaurant(restaurantName)
+  //   cy.reload()
+  //   cy.contains(restaurantName)
+  // }
 
   it('displays the restaurant in the list', () => {
     const restaurantName = 'Oshi Sushi'
-    const otherRestaurantName = 'Kokomo Burger'
+    // const otherRestaurantName = 'Kokomo Burger'
 
     cy.visit('http://localhost:4173')
 

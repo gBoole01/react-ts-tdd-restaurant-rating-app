@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import { useAppSelector as useSelector } from '../store/hooks'
-import { selectRestaurants } from '../store/restaurants/restaurantsSlice'
+import { selectRestaurants } from '../store/restaurantsSlice'
 
 export const slugifyRestaurantName = (...args: (string | number)[]): string => {
   const value = args.join(' ')

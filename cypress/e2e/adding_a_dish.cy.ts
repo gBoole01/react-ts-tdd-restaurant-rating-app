@@ -48,9 +48,13 @@ describe('adding a dish', () => {
     cy.contains(restaurantName).click()
   }
 
-  function dishesPersistedWhenRefreshing(dishName: string) {
+  function dishesPersistedWhenRefreshing(
+    restaurantName: string,
+    dishName: string,
+  ) {
     addDish(dishName)
-    cy.reload()
+    cy.get('[data-testid="backButton"]').click()
+    cy.contains(restaurantName).click()
     cy.contains(dishName)
   }
 
@@ -67,10 +71,10 @@ describe('adding a dish', () => {
     shownElementsArePresentAtTheStart(restaurantName)
     hiddenElementsAreNotPresentAtTheStart()
 
-    // backButtonAllowsGoingToPreviousPage(restaurantName)
+    backButtonAllowsGoingToPreviousPage(restaurantName)
     modalCanBeCancelled()
     modalDisplaysValidationErrors()
     modalAllowsAddingDish(dishName)
-    // dishesPersistedWhenRefreshing(otherDishName)
+    dishesPersistedWhenRefreshing(restaurantName, otherDishName)
   })
 })

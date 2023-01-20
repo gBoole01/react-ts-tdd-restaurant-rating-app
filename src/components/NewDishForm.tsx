@@ -7,10 +7,11 @@ import {
   OutlinedInput,
 } from '@mui/material'
 import { useFormik } from 'formik'
+import { useAppDispatch as useDispatch } from '../store/hooks'
+import { addDish } from '../store/dishesSlice'
 
 type NewDishFormProps = {
   closeModal: () => void
-  addNewDish: (name: string) => void
 }
 
 type CloseModalButtonProps = {
@@ -37,10 +38,9 @@ const inputProps = {
   'data-testid': 'newDishName',
 }
 
-export default function NewDishForm({
-  closeModal,
-  addNewDish,
-}: NewDishFormProps) {
+export default function NewDishForm({ closeModal }: NewDishFormProps) {
+  const dispatch = useDispatch()
+
   const validate = (values: { name: string }) => {
     const errors = {}
     if (!values.name || values.name === '') {
@@ -63,7 +63,7 @@ export default function NewDishForm({
     },
     validate,
     onSubmit: (data, { resetForm }) => {
-      addNewDish(data.name)
+      dispatch(addDish({ name: data.name }))
       resetForm()
       closeModal()
     },
