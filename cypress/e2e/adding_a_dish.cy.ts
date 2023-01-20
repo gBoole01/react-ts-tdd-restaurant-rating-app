@@ -48,29 +48,60 @@ describe('adding a dish', () => {
     cy.contains(restaurantName).click()
   }
 
-  function dishesPersistedWhenRefreshing(dishName: string) {
+  function dishesPersistedWhenLeavingThePage(
+    restaurantName: string,
+    dishName: string,
+  ) {
     addDish(dishName)
-    cy.reload()
+    cy.get('[data-testid="backButton"]').click()
+    cy.contains(restaurantName).click()
+    cy.contains(dishName)
+  }
+
+  function dishesStoredPerRestaurant(
+    originRestaurantName: string,
+    restaurantName: string,
+    absentDishName: string,
+    dishName: string,
+  ) {
+    addDish(absentDishName)
+    cy.get('[data-testid="backButton"]').click()
+    addRestaurant(restaurantName)
+    goToRestaurantPage(restaurantName)
+    cy.contains(absentDishName).should('not.exist')
+    addDish(dishName)
+    cy.get('[data-testid="backButton"]').click()
+    cy.contains(originRestaurantName).click()
     cy.contains(dishName)
   }
 
   it('displays the dish in the list', () => {
-    const restaurantName = 'Oshi Sushi'
-    const dishName = 'Menu E - "Duo"'
-    const otherDishName = 'Gyozas *5'
+    const restaurantNames = ['Oshi Sushi', 'Kokomo Burger']
+    const dishNames = [
+      'Menu E - "Duo"',
+      'Gyozas *5',
+      'California Saumon',
+      'Loaded Fries',
+    ]
 
     cy.visit('http://localhost:4173')
 
-    addRestaurant(restaurantName)
-    goToRestaurantPage(restaurantName)
+    addRestaurant(restaurantNames[0])
+    goToRestaurantPage(restaurantNames[0])
 
-    shownElementsArePresentAtTheStart(restaurantName)
+    shownElementsArePresentAtTheStart(restaurantNames[0])
     hiddenElementsAreNotPresentAtTheStart()
 
-    // backButtonAllowsGoingToPreviousPage(restaurantName)
+    backButtonAllowsGoingToPreviousPage(restaurantNames[0])
     modalCanBeCancelled()
     modalDisplaysValidationErrors()
-    modalAllowsAddingDish(dishName)
-    // dishesPersistedWhenRefreshing(otherDishName)
+    modalAllowsAddingDish(dishNames[0])
+    dishesPersistedWhenLeavingThePage(restaurantNames[0], dishNames[1])
+    // dishesStoredPerRestaurant(
+    //   restaurantNames[0],
+    //   restaurantNames[1],
+    //   dishNames[2],
+    //   dishNames[3],
+    // )
   })
 })
