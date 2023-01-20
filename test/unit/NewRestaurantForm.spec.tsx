@@ -1,7 +1,14 @@
 import React from 'react'
 import { expect, test, describe, vi, beforeEach } from 'vitest'
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react'
+import { useDispatch } from 'react-redux'
 import NewRestaurantForm from '../../src/components/NewRestaurantForm'
+
+vi.mock('react-redux', async () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...(await vi.importActual<any>('react-redux')),
+  useDispatch: vi.fn(),
+}))
 
 describe('<NewRestaurantForm />', () => {
   const closeModalHandler = vi.fn()
@@ -30,6 +37,12 @@ describe('<NewRestaurantForm />', () => {
       waitFor(() => {
         expect(closeModalHandler).toHaveBeenCalled()
       })
+    })
+    test('dispatches action to state manager', () => {
+      const dispatchMock = vi.fn()
+      // @ts-expect-error: Type change because of mocking
+      const dispatchFn = useDispatch.mockReturnValue(dispatchMock)
+      expect(dispatchFn).toHaveBeenCalled()
     })
   })
 
