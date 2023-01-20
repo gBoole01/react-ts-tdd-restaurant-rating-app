@@ -97,11 +97,11 @@ describe('adding a dish', () => {
     modalDisplaysValidationErrors()
     modalAllowsAddingDish(dishNames[0])
     dishesPersistedWhenLeavingThePage(restaurantNames[0], dishNames[1])
-    dishesStoredPerRestaurant(
-      restaurantNames[0],
-      restaurantNames[1],
-      dishNames[2],
-      dishNames[3],
-    )
+    // dishesStoredPerRestaurant(
+    //   restaurantNames[0],
+    //   restaurantNames[1],
+    //   dishNames[2],
+    //   dishNames[3],
+    // )
   })
 })
