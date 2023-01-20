@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { Dish } from '../types'
 import { RootState } from './store'
 
-type DishesState = {
+export type DishesState = {
   dishes: Dish[]
 }
 
